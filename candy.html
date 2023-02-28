@@ -25,10 +25,21 @@
                     <input type="checkbox" id="chewy_checkbox" name="chewy" value="False">
                 </div>
             </form>
-
             <button onclick="selectBox()">Select a box</button>
-
             <p id="results"></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="box">
+            <form>
+                <label for="size">Enter the size:</label>
+                <input type="text" id="size" value="size">
+                <label for="price">Enter price:</label>
+                <input type="text" id="price">
+            </form>
+            <button onclick="updateBox()">Update the box</button>
+            <p id="resultvalnew"></p>
         </div>
     </div>
 
@@ -42,6 +53,13 @@
             my_candy_box.nuts = document.getElementById("nuts_checkbox").checked;
             my_candy_box.chewy = document.getElementById("chewy_checkbox").checked;
             document.getElementById("results").innerHTML = JSON.stringify(my_candy_box);
+        }
+
+        function updateBox() {
+            const size = document.getElementById('size').value;
+            const price = document.getElementById('price').value;
+            my_candy_box[size] = price;
+            document.getElementById('resultvalnew').innerHTML = JSON.stringify(my_candy_box);
         }
     </script>
 
