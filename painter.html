@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Painter Entry</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+	<h1 style="text-align: center;">Painter Entry - Mnaohar Sri Vikram Vattikuti</h1>
+	<h2 style="text-align: center;">Getting input</h2>
+	<form>
+		<label for="hidden-painter-name">The hidden painter name:</label>
+		<input type="password" id="hidden-painter-name" value="Painter">
+		<label for="guess-painter-name">Guess the painter:</label>
+		<input type="text" id="guess-painter-name">
+		<button type="button" onclick="checkPainter()">Check the guess</button>
+	</form>
+	<p>Good: <span id="good-count" class="score">0</span>, Oops: <span id="oops-count" class="score">0</span></p>
+	<script>
+		let good = 0;
+		let oops = 0;
+
+		function checkPainter() {
+			const hiddenPainterName = document.getElementById("hidden-painter-name").value;
+			const guessedPainterName = document.getElementById("guess-painter-name").value;
+
+			if (hiddenPainterName === guessedPainterName) {
+				good++;
+				alert("You got it right!");
+			} else {
+				oops++;
+				alert("Sorry, wrong guess!");
+			}
+
+			document.getElementById("good-count").innerHTML = good;
+			document.getElementById("oops-count").innerHTML = oops;
+		}
+	</script>
+</body>
+
+</html>
