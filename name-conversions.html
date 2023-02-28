@@ -3,65 +3,36 @@
 
 <head>
     <title>Currency Conversions</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        label {
-            display: inline-block;
-            width: 200px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        input[type="number"] {
-            width: 100px;
-            padding: 5px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        input[type="button"] {
-            padding: 5px 10px;
-            border-radius: 5px;
-            border: none;
-            background-color: #0077cc;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        input[type="button"]:hover {
-            background-color: #005fa3;
-        }
-
-        #result {
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-            line-height: 1.5;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="conversion.css">
 </head>
 
 <body>
 
     <h1>Manohar shows currency conversions</h1>
-    <label for="base-amount">Enter base amount:</label>
-    <input type="number" id="base-amount" value="50" />
-    <br /><br />
-    <label for="conversion-rate">Enter the conversion rate:</label>
-    <input type="number" id="conversion-rate" value="35" />
-    <br /><br />
-    <input type="button" value="Show conversions" onclick="convert()" />
-    <br /><br />
-    <div id="result"></div>
+    <div class="container">
+        <div class="box">
+            <label for="base-amount">Enter base amount:</label>
+            <input type="number" id="base-amount" value="50" />
+            <br /><br />
+            <label for="conversion-rate">Enter the conversion rate:</label>
+            <input type="number" id="conversion-rate" value="35" />
+            <br /><br />
+            <input type="button" value="Show conversions" onclick="convert()" />
+            <br /><br />
+            <div id="result"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="box">
+            <form>
+                <label><input type="radio" name="operation" value="mean" id="mean">Average</label>
+                <label><input type="radio" name="operation" value="maximum" id="maximum">Max</label>
+                <label><input type="radio" name="operation" value="minimum" id="minimum">Min</label>
+            </form>
+            <button onClick="chooseOp()">Calculate</button>
+            <div id="output"></div>
+        </div>
+    </div>
     <script>
         function convert() {
             const baseAmount = document.getElementById("base-amount").value;
@@ -73,6 +44,22 @@
                 toShow += `${amount} is ${convertedAmount}; `;
             }
             document.getElementById("result").innerHTML = "Conversions are: " + toShow;
+        }
+
+        function chooseOp() {
+            var base = parseFloat(document.getElementById("base-amount").value);
+            var conversion = parseFloat(document.getElementById("conversion-rate").value);
+            var result;
+            if (document.getElementById("mean").checked) {
+                result = (base + conversion) / 2;
+                document.getElementById("output").innerHTML = "The average of " + base + " and " + conversion + " is " + result;
+            } else if (document.getElementById("maximum").checked) {
+                result = Math.max(base, conversion);
+                document.getElementById("output").innerHTML = "The maximum of " + base + " and " + conversion + " is " + result;
+            } else if (document.getElementById("minimum").checked) {
+                result = Math.min(base, conversion);
+                document.getElementById("output").innerHTML = "The minimum of " + base + " and " + conversion + " is " + result;
+            }
         }
     </script>
 
